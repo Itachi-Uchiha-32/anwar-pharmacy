@@ -22,24 +22,24 @@ export default async function ProductDetails({ params }) {
       <main className="max-w-[1300px] mx-auto px-4 mt-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
           
-          {/* LEFT SECTION: Product Details & Description */}
+          
           <div className="space-y-6">
             
-            {/* Top Card: Image and Actions */}
+            
             <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm grid md:grid-cols-2 gap-8">
               
-              {/* Image Gallery Column */}
+              
               <div className="space-y-4">
                 <div className="border border-gray-100 rounded-lg p-4 flex items-center justify-center bg-white h-[350px]">
                   <img src={product.image} alt={product.name} className="max-h-full object-contain" />
                 </div>
-                {/* Thumbnail placeholder */}
+                
                 <div className="w-16 h-16 border-2 border-red-500 rounded p-1 cursor-pointer">
                   <img src={product.image} className="w-full h-full object-contain" />
                 </div>
               </div>
 
-              {/* Info & Buying Column */}
+              
               <div className="flex flex-col">
                 <h1 className="text-xl font-bold text-gray-800 mb-1">{product.name}</h1>
                 <div className="flex items-center gap-1 text-[#FBBF24] mb-4">
@@ -56,7 +56,7 @@ export default async function ProductDetails({ params }) {
                   </span>
                 </div>
 
-                {/* Quantity & Cart Actions */}
+                
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex border border-gray-300 rounded overflow-hidden h-10">
                     <button className="px-3 bg-gray-50 hover:bg-gray-100">-</button>
@@ -71,7 +71,7 @@ export default async function ProductDetails({ params }) {
                   </button>
                 </div>
 
-                {/* Secondary Order Buttons */}
+                
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   <button className="bg-[#065F46] text-white py-2 rounded text-xs font-bold flex items-center justify-center gap-2">
                     💬 হোয়াটসঅ্যাপ অর্ডার
@@ -88,7 +88,7 @@ export default async function ProductDetails({ params }) {
               </div>
             </div>
 
-            {/* Description Section */}
+            
             <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
               <div className="flex border-b bg-gray-50">
                 <button className="px-6 py-3 bg-[#10B981] text-white text-sm font-bold rounded-t-lg">Description</button>
@@ -104,14 +104,14 @@ export default async function ProductDetails({ params }) {
             </div>
           </div>
 
-          {/* RIGHT SECTION: Sidebar & Related Products */}
+          
           <div className="space-y-6">
             <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
               <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-4">Related Products</h3>
               <p className="text-xs text-gray-400 italic">No related products found.</p>
             </div>
 
-            {/* Category Sidebar */}
+            
             <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
               <Sidebar />
             </div>

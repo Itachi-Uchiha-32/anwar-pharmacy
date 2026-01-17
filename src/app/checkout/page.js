@@ -20,20 +20,20 @@ export default function CheckoutPage() {
   });
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const deliveryFee = formData.area.includes("Inside") ? 60 : 120; // Dynamic delivery fee
+  const deliveryFee = formData.area.includes("Inside") ? 60 : 120; 
   const total = subtotal + deliveryFee;
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents page reload
+    e.preventDefault(); 
 
-    // 1. Generate a random Order ID
+    
     const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
 
-    // 2. Redirect to success page with the ID
-    // We pass the orderId as a dynamic route parameter
+    
+    
     router.push(`/checkout/order/${orderId}`);
     
-    // 3. Clear the cart (Optional: you might want to do this on the success page instead)
+    
     if (clearCart) clearCart();
   };
 

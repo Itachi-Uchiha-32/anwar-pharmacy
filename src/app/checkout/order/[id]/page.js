@@ -21,7 +21,7 @@ export default function OrderSuccess({ params }) {
       <Navbar />
       <div className="pt-10 pb-12 max-w-[800px] mx-auto px-4 text-center">
         
-        {/* Success Header */}
+        
         <div className="flex justify-center mb-3">
           <CheckCircle className="text-[#10B981]" size={48} />
         </div>
@@ -30,7 +30,7 @@ export default function OrderSuccess({ params }) {
           Your order <span className="font-bold text-gray-900">#INV-{orderId}</span> has been confirmed.
         </p>
 
-        {/* Order Status Section */}
+        
         <div className="bg-white mt-8 p-6 rounded-2xl border border-gray-100 shadow-sm">
           <div className="flex justify-between items-center mb-10">
              <span className="text-[10px] font-bold text-gray-700 uppercase tracking-widest">Order Status</span>
@@ -50,7 +50,7 @@ export default function OrderSuccess({ params }) {
           </div>
         </div>
 
-        {/* REFINED ORDER DETAILS */}
+        
         <div className="bg-white mt-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden text-left">
           <div className="px-6 py-4 border-b border-gray-50">
             <h3 className="text-[11px] font-bold text-gray-700 uppercase tracking-widest">Order Details</h3>
@@ -75,7 +75,7 @@ export default function OrderSuccess({ params }) {
           </div>
         </div>
 
-        {/* Information Grid */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 text-left">
            <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
              <h4 className="font-bold text-[10px] text-gray-700 uppercase border-b border-gray-50 pb-3 mb-4 tracking-widest">Shipping Information</h4>
@@ -96,7 +96,7 @@ export default function OrderSuccess({ params }) {
            </div>
         </div>
 
-        {/* Footer Actions */}
+        
         <div className="flex gap-4 justify-center mt-10">
           <Link href="/" className="bg-[#10B981] text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2 text-[12px] uppercase tracking-widest hover:bg-emerald-600 shadow-lg shadow-emerald-50 transition-all active:scale-95">
             <ShoppingBag size={16} /> Continue Shopping

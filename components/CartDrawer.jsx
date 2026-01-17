@@ -14,7 +14,6 @@ export default function CartDrawer() {
   };
   return (
     <>
-      {/* 1. DARK OVERLAY - Fades in/out */}
       <div 
         className={`fixed inset-0 bg-black/50 z-[998] transition-opacity duration-300 ease-in-out ${
           isCartOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -22,12 +21,12 @@ export default function CartDrawer() {
         onClick={toggleCart} 
       />
       
-      {/* 2. DRAWER PANEL - Slides in/out from right */}
+     
       <div className={`fixed right-0 top-0 z-[999] w-full max-w-md bg-white h-full shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${
         isCartOpen ? "translate-x-0" : "translate-x-full"
       }`}>
         
-        {/* Header */}
+       
         <div className="bg-[#10B981] p-4 flex justify-between items-center text-white shadow-md">
           <h2 className="font-bold text-lg">Shopping Cart</h2>
           <button 
@@ -38,7 +37,7 @@ export default function CartDrawer() {
           </button>
         </div>
 
-        {/* Product List Section */}
+       
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {cartItems.length > 0 ? (
             cartItems.map((item, index) => (
@@ -85,7 +84,7 @@ export default function CartDrawer() {
           )}
         </div>
 
-        {/* Sticky Footer Button */}
+       
         <div className="p-4 border-t bg-white">
           <button onClick={handleCheckout} disabled={cartItems.length === 0} className="w-full bg-[#10B981] text-white py-4 rounded-xl font-bold flex justify-between px-6 hover:bg-emerald-600 transition-all active:scale-[0.97] shadow-lg shadow-green-100">
             <span className="uppercase tracking-wider text-sm">Proceed To Checkout</span>
