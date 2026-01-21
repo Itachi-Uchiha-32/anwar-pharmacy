@@ -2,9 +2,9 @@
 import React, { use } from "react";
 import { CheckCircle, Printer, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import { useCart } from "../../../../../context/CartContext";
-import Navbar from "../../../../../components/Navbar";
-import Footer from "../../../../../components/Footer";
+import { useCart } from "../../../../context/CartContext";
+import Navbar from "../../../../components/Navbar";
+import Footer from "../../../../components/Footer";
 
 
 export default function OrderSuccess({ params }) {

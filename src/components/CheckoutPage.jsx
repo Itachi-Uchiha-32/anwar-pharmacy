@@ -15,7 +15,7 @@ export default function CheckoutPage() {
     <div className="max-w-[1200px] mx-auto px-4 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* LEFT COLUMN: Shipping & Payment */}
+        
         <div className="lg:col-span-7 space-y-6">
           <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
             <h2 className="text-xl font-bold text-gray-800 mb-6">Shipping Address</h2>
@@ -49,7 +49,7 @@ export default function CheckoutPage() {
               <textarea placeholder="Note..." rows="3" className="w-full p-2.5 border rounded-md outline-none resize-none"></textarea>
             </div>
 
-            {/* Payment Info */}
+            
             <h3 className="font-bold text-gray-800 mb-4">Payment Info :</h3>
             <div className="bg-gray-50 p-4 rounded-lg space-y-3">
               <label className="flex items-center gap-3 cursor-pointer">
@@ -68,12 +68,12 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Summary */}
+        
         <div className="lg:col-span-5 space-y-6">
           <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
             <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Product List</h2>
             
-            {/* Scrollable Product List */}
+            
             <div className="max-h-[300px] overflow-y-auto pr-2 custom-scrollbar space-y-4 mb-6">
               {cartItems.map((item) => (
                 <div key={item.id} className="flex gap-3 items-center border border-gray-100 p-2 rounded-md">
@@ -93,7 +93,7 @@ export default function CheckoutPage() {
               ))}
             </div>
 
-            {/* Order Summary */}
+            
             <div className="space-y-3 border-t pt-4">
               <h3 className="font-bold text-gray-800 mb-2">Order Summary</h3>
               <div className="flex justify-between text-sm text-gray-600">
@@ -111,7 +111,7 @@ export default function CheckoutPage() {
               <p className="text-[10px] text-gray-400 text-right italic">VAT Included, where applicable</p>
             </div>
 
-            {/* Coupon Code */}
+            
             <div className="mt-6 flex gap-2">
               <input type="text" placeholder="Enter your coupon code" className="flex-1 p-2 border rounded-md text-sm outline-none" />
               <button className="bg-[#10B981] text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-emerald-600 transition-colors">

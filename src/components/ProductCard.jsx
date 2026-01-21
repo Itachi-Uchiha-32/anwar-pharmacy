@@ -8,8 +8,8 @@ import { useCart } from "../context/CartContext";
 export default function ProductCard({ product }) {
   const { addToCart } = useCart(); 
 
-  const discount = product.oldPrice 
-    ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) 
+  const discount = product.productPrice 
+    ? Math.round(((product.productPrice - product.salePrice) / product.productPrice) * 100) 
     : 0;
 
   return (
@@ -28,10 +28,10 @@ export default function ProductCard({ product }) {
       </button>
 
       
-      <Link href={`/product/${product.slug}`} className="block">
+      <Link href={`/product/${product.path}`} className="block">
         <div className="h-40 w-full mb-4 flex items-center justify-center overflow-hidden cursor-pointer">
           <img
-            src={product.image}
+            src={product.imageURLs}
             alt={product.name}
             className="h-full object-contain group-hover:scale-110 transition-transform duration-500"
           />
@@ -41,11 +41,11 @@ export default function ProductCard({ product }) {
       
       <div className="flex items-center gap-2 mb-1">
         <span className="text-[#10B981] font-bold text-sm">
-          BDT {product.price}
+          BDT {product.salePrice}
         </span>
-        {product.oldPrice && (
+        {product.productPrice && (
           <span className="text-gray-400 line-through text-[10px]">
-            BDT {product.oldPrice}
+            BDT {product.productPrice}
           </span>
         )}
       </div>

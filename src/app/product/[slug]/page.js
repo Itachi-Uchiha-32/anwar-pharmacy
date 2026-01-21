@@ -1,121 +1,117 @@
-import { products } from "../../../../data/products";
-import Navbar from "../../../../components/Navbar";
-import Sidebar from "../../../../components/Sidebar";
-import Footer from "../../../../components/Footer";
+import React from "react";
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
+import { shopApi } from "@/lib/api";
+import ProductActions from "./ProductActions"; 
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params; 
+  const response = await shopApi.getProductDetails(slug);
+  const product = response?.data;
+
+  if (!product) return { title: "Product Not Found | Anwar Pharmacy" };
+
+  return {
+    title: `${product.name} - Anwar Pharmacy`,
+    description: `Buy ${product.name} at Anwar Pharmacy. Quality healthcare products delivered to your door.`,
+    openGraph: { images: [product.imageURLs?.[0]] },
+  };
+}
 
 export default async function ProductDetails({ params }) {
   const { slug } = await params;
-  const product = products.find((p) => p.slug === slug);
+  const response = await shopApi.getProductDetails(slug);
+  const product = response?.data;
 
-  if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 font-bold">
-        Product not found
-      </div>
-    );
-  }
+  if (!product) return <div className="p-20 text-center">Product not found</div>;
 
   return (
-    <div className="bg-[#F9FAFB] min-h-screen pb-10">
+    <div className="bg-[#F9FAFB] min-h-screen">
       <Navbar />
       
-      <main className="max-w-[1300px] mx-auto px-4 mt-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
+      <main className="max-w-[1300px] mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
           
-          
-          <div className="space-y-6">
-            
-            
-            <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm grid md:grid-cols-2 gap-8">
+          <div className="space-y-8">
+            {/* Main Product Card */}
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 grid md:grid-cols-2 gap-10">
               
-              
+              {/* Left: Image Section */}
               <div className="space-y-4">
-                <div className="border border-gray-100 rounded-lg p-4 flex items-center justify-center bg-white h-[350px]">
-                  <img src={product.image} alt={product.name} className="max-h-full object-contain" />
+                <div className="relative border border-gray-50 rounded-2xl p-6 flex items-center justify-center bg-white h-[400px]">
+                  <img 
+                    src={product.imageURLs?.[0] || "/placeholder.png"} 
+                    
+                    alt={`${product.name} - ${product.brand} ${product.category?.[0] || ''} at Anwar Pharmacy`} 
+                    className="max-h-full object-contain" 
+                  />
+                  {/* Arrows overlay if you want to implement a slider later */}
+                  <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 text-gray-400 hover:text-gray-800">←</button>
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 text-gray-400 hover:text-gray-800">→</button>
                 </div>
-                
-                <div className="w-16 h-16 border-2 border-red-500 rounded p-1 cursor-pointer">
-                  <img src={product.image} className="w-full h-full object-contain" />
+                <div className="flex gap-3">
+                  <div className="w-20 h-20 border-2 border-pink-500 rounded-lg p-1">
+                     <img src={product.imageURLs?.[0]} className="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
 
-              
+              {/* Right: Info Section */}
               <div className="flex flex-col">
-                <h1 className="text-xl font-bold text-gray-800 mb-1">{product.name}</h1>
-                <div className="flex items-center gap-1 text-[#FBBF24] mb-4">
-                  {"★".repeat(5)} <span className="text-gray-400 text-xs ml-2">In Stock</span>
+                <h1 className="text-2xl font-bold text-[#1F2937] mb-2">{product.name}</h1>
+                
+                <div className="flex items-center gap-2 mb-4">
+                   <div className="flex text-yellow-400 text-sm">★★★★★</div>
+                   <span className="text-xs font-bold text-[#10B981]">In Stock</span>
                 </div>
 
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl font-black text-[#F97316]">TK {product.price}.00</span>
-                  {product.oldPrice && (
-                    <span className="text-gray-400 line-through text-sm">TK {product.oldPrice}.00</span>
-                  )}
-                  <span className="bg-[#EF4444] text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">
-                    {Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}% OFF
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="text-4xl font-black text-[#F97316]">TK {product.salePrice}.00</span>
+                  <span className="text-gray-400 line-through text-sm italic">TK {product.productPrice}.00</span>
+                  <span className="bg-pink-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                    {product.discount}% OFF
                   </span>
                 </div>
 
-                
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex border border-gray-300 rounded overflow-hidden h-10">
-                    <button className="px-3 bg-gray-50 hover:bg-gray-100">-</button>
-                    <input type="text" value="1" className="w-10 text-center text-sm border-x outline-none" readOnly />
-                    <button className="px-3 bg-gray-50 hover:bg-gray-100">+</button>
-                  </div>
-                  <button className="bg-[#10B981] hover:bg-emerald-600 text-white px-4 h-10 rounded font-bold text-sm flex items-center gap-2">
-                    🛒 যোগ করুন
-                  </button>
-                  <button className="bg-[#F97316] hover:bg-orange-600 text-white px-4 h-10 rounded font-bold text-sm">
-                    অর্ডার করুন
-                  </button>
-                </div>
+                {/* INTERACTIVE ACTIONS (Quantity, Buy, Buttons) */}
+                <ProductActions product={product} />
 
-                
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  <button className="bg-[#065F46] text-white py-2 rounded text-xs font-bold flex items-center justify-center gap-2">
-                    💬 হোয়াটসঅ্যাপ অর্ডার
-                  </button>
-                  <button className="bg-[#701A75] text-white py-2 rounded text-xs font-bold flex items-center justify-center gap-2">
-                    📞 কলে অর্ডার করুন
-                  </button>
-                </div>
-
-                <div className="border-t pt-4 text-xs space-y-2">
-                  <p><span className="font-bold text-gray-700">Category:</span> <span className="text-purple-600 cursor-pointer">{product.category}</span></p>
-                  <p><span className="font-bold text-gray-700">Brand:</span><span className="text-purple-600 cursor-pointer"> {product.brand || "General"}</span></p>
+                <div className="mt-8 space-y-2 border-t pt-6">
+                  <p className="text-sm font-bold text-gray-700">
+                    Category: <span className="text-purple-600 font-medium">{product.category?.[0]}</span>
+                  </p>
+                  <p className="text-sm font-bold text-gray-700">
+                    Brand: <span className="text-purple-600 font-medium">{product.brand}</span>
+                  </p>
                 </div>
               </div>
             </div>
 
-            
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-              <div className="flex border-b bg-gray-50">
-                <button className="px-6 py-3 bg-[#10B981] text-white text-sm font-bold rounded-t-lg">Description</button>
-                <button className="px-6 py-3 text-gray-500 text-sm hover:text-gray-800">Review (0)</button>
-                <button className="px-6 py-3 text-gray-500 text-sm hover:text-gray-800">Video</button>
+            {/* Centered Tab Section */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+              <div className="flex justify-center gap-4 p-4 border-b">
+                <button className="px-8 py-2 bg-[#10B981] text-white rounded-full text-sm font-bold">Description</button>
+                <button className="px-8 py-2 bg-gray-50 text-gray-500 rounded-full text-sm font-bold border hover:bg-white">Review (0)</button>
+                <button className="px-8 py-2 bg-gray-50 text-gray-500 rounded-full text-sm font-bold border hover:bg-white">Video</button>
               </div>
-              <div className="p-6">
-                <h3 className="font-bold text-gray-800 mb-4">Description:</h3>
-                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
-                  {product.description}
-                </p>
+              <div className="p-10">
+                <div 
+                  className="prose prose-sm max-w-none text-gray-600"
+                  dangerouslySetInnerHTML={{ __html: product.description }} 
+                />
               </div>
             </div>
           </div>
 
-          
-          <div className="space-y-6">
-            <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-4">Related Products</h3>
-              <p className="text-xs text-gray-400 italic">No related products found.</p>
+          {/* Right Sidebar */}
+          <aside className="space-y-6">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+               <h3 className="font-bold border-b-2 border-pink-500 inline-block mb-4">Related Products</h3>
+               {/* Related Products list would go here */}
             </div>
-
-            
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-              <Sidebar />
-            </div>
-          </div>
+            <Sidebar />
+          </aside>
 
         </div>
       </main>

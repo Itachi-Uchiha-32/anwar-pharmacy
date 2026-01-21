@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2, Minus, Plus } from "lucide-react";
-import { useCart } from "../../../context/CartContext";
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
+import { useCart } from "../../context/CartContext";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -41,10 +41,10 @@ export default function CheckoutPage() {
     <div className="bg-[#F9FAFB] min-h-screen pb-10">
       <Navbar />
       
-      {/* Wrap the content in a form to enable 'required' validation */}
+      
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 md:px-10 py-8 max-w-[1400px] mx-auto">
         
-        {/* LEFT COLUMN: Shipping & Payment */}
+        
         <div className="lg:col-span-7 space-y-6">
           <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
             <h2 className="text-xl font-bold text-gray-800 mb-6">Shipping Address</h2>
@@ -109,7 +109,7 @@ export default function CheckoutPage() {
               ></textarea>
             </div>
 
-            {/* Payment Info */}
+            
             <h3 className="font-bold text-gray-800 mb-4">Payment Info :</h3>
             <div className="bg-gray-50 p-4 rounded-lg space-y-3">
               <label className="flex items-center gap-3 cursor-pointer text-gray-700">
@@ -122,7 +122,7 @@ export default function CheckoutPage() {
               </label>
             </div>
 
-            {/* Changed to type="submit" so the browser validates 'required' fields */}
+            
             <button 
               type="submit"
               className="w-full bg-[#10B981] text-white font-bold py-3 rounded-md mt-6 hover:bg-emerald-600 transition-colors uppercase tracking-wide cursor-pointer"
@@ -132,7 +132,7 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Summary */}
+        
         <div className="lg:col-span-5 space-y-6">
           <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm sticky top-24">
             <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Product List</h2>

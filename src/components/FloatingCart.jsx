@@ -1,13 +1,23 @@
 "use client";
-
+import { useSyncExternalStore } from "react";
 import { useCart } from "../context/CartContext";
 
+
+const subscribe = () => () => {}; 
+const getSnapshot = () => true;   
+const getServerSnapshot = () => false; 
 
 export default function FloatingCart() {
   const { cartItems, toggleCart } = useCart();
   
+  
+  const isMounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
   const itemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalAmount = cartItems.reduce((acc, item) => acc + item.salePrice * item.quantity, 0);
+
+  
+  if (!isMounted) return null;
 
   return (
     <div 
