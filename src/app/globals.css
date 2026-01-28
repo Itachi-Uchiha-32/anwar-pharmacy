@@ -6,6 +6,21 @@
   --foreground: #171717;
 }
 
+
+/* Fix for the inner-zoom container to respect your 400px height */
+.iiz {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.iiz__img {
+  max-height: 350px !important; /* Slightly less than container to allow padding */
+  object-fit: contain !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
